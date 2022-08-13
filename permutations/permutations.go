@@ -1,8 +1,13 @@
 package permutations
 
-const digits = 4
+import (
+	"github.com/numbers-game/consts"
+	"github.com/numbers-game/types"
+)
 
-type Number [digits]int8
+const digits = consts.Digits
+
+type Number types.Number
 
 type Permutaions struct {
 	numbers []Number

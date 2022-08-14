@@ -9,6 +9,10 @@ func Win(score types.Score) bool {
 	return score.Guessed == consts.Digits && score.Postions == consts.Digits
 }
 
+func AppendScore(scores types.Scores, score types.Score) types.Scores {
+	return append(scores, score)
+}
+
 func Calc(called types.Number, hidden types.Number) types.Score {
 	return types.Score{
 		Number:   called,

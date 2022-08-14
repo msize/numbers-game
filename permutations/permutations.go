@@ -5,48 +5,29 @@ import (
 	"github.com/numbers-game/types"
 )
 
-const digits = consts.Digits
-
-type Number types.Number
-
-type Permutaions struct {
-	numbers []Number
-}
-
-func New() (result Permutaions) {
-	return generate(Permutaions{})
-}
-
-func (this Permutaions) Len() int {
-	return len(this.numbers)
-}
-
-func (this Permutaions) Get(i int) Number {
-	return this.numbers[i]
-}
-
-func generate(result Permutaions) Permutaions {
+func Generate() types.Numbers {
+	result := types.Numbers{}
 	currentNumber := firstNumber()
 	for hasNext := true; hasNext; currentNumber, hasNext = next(currentNumber) {
-		result.numbers = append(result.numbers, currentNumber)
+		result = append(result, currentNumber)
 	}
 	return result
 }
 
-func firstNumber() Number {
-	var result Number
+func firstNumber() types.Number {
+	var result types.Number
 	var i int8
-	for i = 0; i < digits; i++ {
+	for i = 0; i < consts.Digits; i++ {
 		result[i] = i
 	}
 	return result
 }
 
-func next(number Number) (Number, bool) {
-	return inc(number, digits-1)
+func next(number types.Number) (types.Number, bool) {
+	return inc(number, consts.Digits-1)
 }
 
-func inc(number Number, position int) (Number, bool) {
+func inc(number types.Number, position int) (types.Number, bool) {
 	if position < 0 {
 		return number, false
 	}
@@ -59,7 +40,7 @@ func inc(number Number, position int) (Number, bool) {
 	return result, hasNext
 }
 
-func nextFree(number Number, position int) int8 {
+func nextFree(number types.Number, position int) int8 {
 	result := number[position] + 1
 	for ; result < 10; result++ {
 		if !occupied(number, result, position) {
@@ -69,8 +50,8 @@ func nextFree(number Number, position int) int8 {
 	return -1
 }
 
-func occupied(number Number, digit int8, position int) bool {
-	for i := 0; i < digits; i++ {
+func occupied(number types.Number, digit int8, position int) bool {
+	for i := 0; i < consts.Digits; i++ {
 		if i != position && number[i] == digit {
 			return true
 		}

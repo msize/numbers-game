@@ -11,7 +11,6 @@ import (
 )
 
 func Run() {
-	fmt.Println("Human vs Machine mode")
 	numbers := permutations.Generate()
 	hidden := fetchRundomNumber(numbers)
 	if showMachineHidden() {

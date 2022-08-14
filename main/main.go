@@ -1,14 +1,21 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
-	"github.com/numbers-game/permutations"
+	"github.com/numbers-game/game/human_vs_human"
+	"github.com/numbers-game/game/human_vs_machine"
 )
 
 func main() {
-	numbers := permutations.New()
-	for i := 0; i < numbers.Len(); i++ {
-		fmt.Println(numbers.Get(i))
+	args := os.Args[1:]
+	if len(args) == 0 {
+		return
+	}
+	switch args[0] {
+	case "hh":
+		human_vs_human.Run()
+	case "hm":
+		human_vs_machine.Run()
 	}
 }

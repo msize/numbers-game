@@ -6,15 +6,34 @@ import (
 )
 
 func Win(score types.Score) bool {
-	return score[0] == consts.Digits && score[1] == consts.Digits
-}
-
-func Equals(first types.Score, second types.Score) bool {
-	return first[0] == second[0] && first[1] == second[1]
+	return score.Guessed == consts.Digits && score.Postions == consts.Digits
 }
 
 func Calc(called types.Number, hidden types.Number) types.Score {
-	return types.Score{guessed(called, hidden), postions(called, hidden)}
+	return types.Score{
+		Number:   called,
+		Guessed:  guessed(called, hidden),
+		Postions: positions(called, hidden),
+	}
+}
+
+func Sift(numbers types.Numbers, scores types.Scores) types.Numbers {
+	var result types.Numbers
+	for _, num := range numbers {
+		if fitNumber(num, scores) {
+			result = append(result, num)
+		}
+	}
+	return result
+}
+
+func fitNumber(number types.Number, scores types.Scores) bool {
+	for _, called := range scores {
+		if !equals(called, Calc(called.Number, number)) {
+			return false
+		}
+	}
+	return true
 }
 
 func guessed(called types.Number, hidden types.Number) int8 {
@@ -30,7 +49,7 @@ func guessed(called types.Number, hidden types.Number) int8 {
 	return result
 }
 
-func postions(called types.Number, hidden types.Number) int8 {
+func positions(called types.Number, hidden types.Number) int8 {
 	result := int8(0)
 	for i := 0; i < consts.Digits; i++ {
 		if called[i] == hidden[i] {
@@ -38,4 +57,8 @@ func postions(called types.Number, hidden types.Number) int8 {
 		}
 	}
 	return result
+}
+
+func equals(first types.Score, second types.Score) bool {
+	return first.Guessed == second.Guessed && first.Postions == second.Postions
 }

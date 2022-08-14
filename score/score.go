@@ -7,11 +7,19 @@ import (
 
 type Number types.Number
 
-type Score [2]int8
+type Score types.Score
 
 const digits = consts.Digits
 
-func calc(called Number, hidden Number) Score {
+func Win(score Score) bool {
+	return score[0] == consts.Digits && score[1] == consts.Digits
+}
+
+func Equals(first Score, second Score) bool {
+	return first[0] == second[0] && first[1] == second[1]
+}
+
+func Calc(called Number, hidden Number) Score {
 	return Score{guessed(called, hidden), postions(called, hidden)}
 }
 

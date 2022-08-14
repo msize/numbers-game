@@ -5,6 +5,9 @@ import (
 	"github.com/numbers-game/types"
 )
 
+const noDigit = -1
+const maxDigit = 9
+
 func Generate() types.Numbers {
 	result := types.Numbers{}
 	currentNumber := firstNumber()
@@ -32,7 +35,7 @@ func inc(number types.Number, position int) (types.Number, bool) {
 		return number, false
 	}
 	number[position] = nextFree(number, position)
-	if number[position] != -1 {
+	if number[position] != noDigit {
 		return number, true
 	}
 	result, hasNext := inc(number, position-1)
@@ -42,12 +45,12 @@ func inc(number types.Number, position int) (types.Number, bool) {
 
 func nextFree(number types.Number, position int) int8 {
 	result := number[position] + 1
-	for ; result < 10; result++ {
+	for ; result <= maxDigit; result++ {
 		if !occupied(number, result, position) {
 			return result
 		}
 	}
-	return -1
+	return noDigit
 }
 
 func occupied(number types.Number, digit int8, position int) bool {

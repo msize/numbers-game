@@ -6,4 +6,10 @@ type Number [consts.Digits]int8
 
 type Numbers []Number
 
-type Score [2]int8
+type Score struct {
+	Number   Number
+	Guessed  int8
+	Postions int8
+}
+
+type Scores []Score

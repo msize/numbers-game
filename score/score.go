@@ -6,7 +6,7 @@ import (
 )
 
 func Win(score types.Score) bool {
-	return score.Guessed == consts.Digits && score.Postions == consts.Digits
+	return score.Guessed == consts.Digits && score.Positions == consts.Digits
 }
 
 func AppendScore(scores types.Scores, score types.Score) types.Scores {
@@ -15,9 +15,9 @@ func AppendScore(scores types.Scores, score types.Score) types.Scores {
 
 func Calc(called types.Number, hidden types.Number) types.Score {
 	return types.Score{
-		Number:   called,
-		Guessed:  guessed(called, hidden),
-		Postions: positions(called, hidden),
+		Number:    called,
+		Guessed:   guessed(called, hidden),
+		Positions: positions(called, hidden),
 	}
 }
 
@@ -64,5 +64,5 @@ func positions(called types.Number, hidden types.Number) int8 {
 }
 
 func equals(first types.Score, second types.Score) bool {
-	return first.Guessed == second.Guessed && first.Postions == second.Postions
+	return first.Guessed == second.Guessed && first.Positions == second.Positions
 }

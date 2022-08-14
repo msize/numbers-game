@@ -7,9 +7,9 @@ type Number [consts.Digits]int8
 type Numbers []Number
 
 type Score struct {
-	Number   Number
-	Guessed  int8
-	Postions int8
+	Number    Number
+	Guessed   int8
+	Positions int8
 }
 
 type Scores []Score

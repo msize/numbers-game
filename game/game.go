@@ -39,7 +39,7 @@ func humanTurn(hidden types.Number) types.Score {
 	fmt.Print("Human turn: ")
 	human := scanNumber()
 	humanScore := score.Calc(human, hidden)
-	fmt.Printf("Human score: %d-%d\n", humanScore.Guessed, humanScore.Postions)
+	fmt.Printf("Human score: %d-%d\n", humanScore.Guessed, humanScore.Positions)
 	return humanScore
 }
 
@@ -56,7 +56,7 @@ func machineTurn(numbers types.Numbers, machineScores types.Scores) types.Scores
 	fmt.Print("Machine score: ")
 	if leftNumbers == 1 {
 		fmt.Println(" 4 4")
-		return score.AppendScore(machineScores, types.Score{Number: calledNumber, Guessed: consts.Digits, Postions: consts.Digits})
+		return score.AppendScore(machineScores, types.Score{Number: calledNumber, Guessed: consts.Digits, Positions: consts.Digits})
 	}
 	return score.AppendScore(machineScores, scanScore(calledNumber))
 }
@@ -87,7 +87,7 @@ func randInt(len int) uint {
 func scanScore(calledNumber types.Number) types.Score {
 	var result types.Score
 	fmt.Scanf("%d", &result.Guessed)
-	fmt.Scanf("%d", &result.Postions)
+	fmt.Scanf("%d", &result.Positions)
 	result.Number = calledNumber
 	return result
 }

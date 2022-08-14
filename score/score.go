@@ -5,28 +5,22 @@ import (
 	"github.com/numbers-game/types"
 )
 
-type Number types.Number
-
-type Score types.Score
-
-const digits = consts.Digits
-
-func Win(score Score) bool {
+func Win(score types.Score) bool {
 	return score[0] == consts.Digits && score[1] == consts.Digits
 }
 
-func Equals(first Score, second Score) bool {
+func Equals(first types.Score, second types.Score) bool {
 	return first[0] == second[0] && first[1] == second[1]
 }
 
-func Calc(called Number, hidden Number) Score {
-	return Score{guessed(called, hidden), postions(called, hidden)}
+func Calc(called types.Number, hidden types.Number) types.Score {
+	return types.Score{guessed(called, hidden), postions(called, hidden)}
 }
 
-func guessed(called Number, hidden Number) int8 {
+func guessed(called types.Number, hidden types.Number) int8 {
 	result := int8(0)
-	for i := 0; i < digits; i++ {
-		for j := 0; j < digits; j++ {
+	for i := 0; i < consts.Digits; i++ {
+		for j := 0; j < consts.Digits; j++ {
 			if called[i] == hidden[j] {
 				result++
 				break
@@ -36,9 +30,9 @@ func guessed(called Number, hidden Number) int8 {
 	return result
 }
 
-func postions(called Number, hidden Number) int8 {
+func postions(called types.Number, hidden types.Number) int8 {
 	result := int8(0)
-	for i := 0; i < digits; i++ {
+	for i := 0; i < consts.Digits; i++ {
 		if called[i] == hidden[i] {
 			result++
 		}
